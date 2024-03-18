@@ -1,0 +1,288 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:buttons_tabbar/buttons_tabbar.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:myntra/UI/Pages/Brand/Brands.dart';
+import 'package:myntra/UI/Pages/Home/MyntraButton.dart';
+import 'package:myntra/UI/Pages/Home/Notification.dart';
+import 'package:myntra/UI/Pages/Home/Shopping-bag.dart';
+import 'package:myntra/UI/Pages/Home/beauty.dart';
+import 'package:myntra/UI/Pages/Home/fashion.dart';
+import 'package:myntra/UI/Pages/Home/homeee.dart';
+import 'package:myntra/UI/Pages/Home/wishlist.dart';
+import 'package:myntra/UI/Pages/Hot-Trends.dart';
+import 'package:myntra/UI/Pages/New/New.dart';
+import 'package:myntra/UI/Pages/other/Insider.dart';
+import 'package:myntra/UI/Pages/profile/Profile.dart';
+
+class Home extends StatefulWidget {
+  const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+
+  int _selectedIndex = 0;
+  int initial = 0;
+
+  final List<Widget> _pages = [
+    home(),
+    hottrends(),
+    New(),
+    brand(),
+    profile(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: _pages[_selectedIndex],
+        bottomNavigationBar: BottomNavigationBar(
+          selectedLabelStyle: const TextStyle(),
+            unselectedLabelStyle: const TextStyle(),
+             type: BottomNavigationBarType.fixed,
+             showUnselectedLabels: true,
+             backgroundColor: Colors.white,
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.screen_search_desktop_outlined),
+              label: 'Fwd',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart),
+              label: 'New',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart),
+              label: 'Brands',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Profile',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+             selectedItemColor: Colors.pinkAccent,
+            unselectedItemColor: Colors.grey,
+             selectedFontSize: 12,
+             unselectedFontSize: 12,
+             iconSize: 25,
+            onTap: _onItemTapped
+        ),
+      ),
+    );
+  }
+}
+
+
+class home extends StatefulWidget {
+  const home({super.key});
+
+  @override
+  State<home> createState() => _homeState();
+}
+
+class _homeState extends State<home> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize:Size.fromHeight(90.0),
+        child: AppBar(
+          // backgroundColor: Colors.green,
+          title: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => MyntraButton()));
+                },
+                child: Container(
+                  height: 40,
+                  width: 81,
+                  // color: Colors.white,
+                  child: Row(
+                    children: [
+                      Text("Myntra",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold
+                      ),),
+                      Icon( Icons.keyboard_arrow_down,
+                        color: Colors.red,)
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                width: 1,
+                height: 45,
+                color: Colors.grey[900],
+              ),
+              SizedBox(width: 5,),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => insider()));
+                },
+                child: Container(
+                  height:40 ,
+                  width: 100,
+                  // color: Colors.white,
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        "assets/images/crown.png",
+                        height: 40,
+                        width: 30,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "BECOME",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.black
+                              ),
+                            ),
+                            Text(
+                              "INSIDER >",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.yellow
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(width: 29,),
+              IconButton(onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => notification()));
+              }, icon: Icon(CupertinoIcons.bell)),
+              IconButton(onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => wishlist()));
+              }, icon: Icon(CupertinoIcons.heart)),
+              IconButton(onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => sBag(accessedFrom: 'home',)));
+              }, icon: Icon(Icons.shopping_bag_outlined))
+            ],
+          ),
+          bottom: PreferredSize(preferredSize: Size.fromHeight(0),
+              child: Container(
+                height: 40,
+                width: 350,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(30)),
+                child: Row(
+                  children: [
+                    SizedBox(width: 5,),
+                    Icon(CupertinoIcons.search,color: Colors.grey[700],),
+                    SizedBox(width: 5,),
+                    Container(
+                      width: 210,
+                      // color: Colors.green,
+                      child: AnimatedTextKit(animatedTexts: [
+                        TyperAnimatedText("Search for brands and products",
+                          textStyle: TextStyle(fontSize: 14,
+                          color: Colors.grey[700]),)
+                      ]),
+                    ),
+                    IconButton(onPressed: (){}, icon: Icon(CupertinoIcons.camera)),
+                    IconButton(onPressed: (){}, icon: Icon(CupertinoIcons.mic))
+                  ],
+                ),
+              ))
+        ),
+      ),
+         body:DefaultTabController(
+            length: 4,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 0),
+              child: Column(
+                crossAxisAlignment:CrossAxisAlignment.start,
+              children: <Widget>[
+                SizedBox(height: 20,),
+                ButtonsTabBar(
+                  decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(30)
+                  ),
+                  unselectedDecoration: BoxDecoration(
+                    border: Border.all(color: Colors.black,),
+                    borderRadius: BorderRadius.circular(30)
+                  ),
+                  unselectedLabelStyle: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
+                  labelStyle:
+                TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  tabs: [
+                    Tab(
+                      // iconMargin: EdgeInsetsGeometry.infinity,
+                    icon: Column(
+                      children: [
+                        Image.asset("assets/images/fashion.png",width: 40,height: 38,),
+                      ],
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                    ),
+                    text: "Fashion   ",
+                    ),
+                    Tab(
+                      icon: Column(
+                        children: [
+                          Image.asset("assets/images/face.png",width: 40,height: 38,),
+                        ],
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                      ),
+                      text: "Beauty  ",
+                    ),
+                    Tab(
+                      icon: Column(
+                        children: [
+                          Image.asset("assets/images/hom.png",width: 40,height: 38,),
+                        ],
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                      ),
+                      text: "Home  ",
+                    ),
+                    Tab(
+                      icon:IconButton(onPressed: (){},
+                          icon: Image.asset("assets/images/more.png"))
+                    ),
+                    ],
+                    ),
+                 Expanded(
+                      child: TabBarView(
+                      children: <Widget>[
+                        fashion(),
+                        beauty(),
+                        homee(),
+                   ],
+                ),
+              ),
+                         ],
+                       ),
+            ),
+      ),
+      );
+  }
+}

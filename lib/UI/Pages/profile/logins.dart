@@ -1,0 +1,192 @@
+import 'package:flutter/material.dart';
+import 'package:myntra/UI/Pages/Home/Home.dart';
+import 'package:myntra/UI/Pages/other/Insider.dart';
+import 'package:myntra/UI/Pages/profile/Profile.dart';
+
+class login extends StatefulWidget {
+  const login({super.key});
+
+  @override
+  State<login> createState() => _loginState();
+}
+
+class _loginState extends State<login> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: home(),
+    );
+  }
+}
+
+class home extends StatefulWidget {
+
+
+  @override
+  State<home> createState() => _homeState();
+}
+
+class _homeState extends State<home> {
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            IconButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => profile()));
+              },
+              icon: Icon(Icons.arrow_back),
+            ),
+          ],
+        ),
+      ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+                left: 0
+            ),
+            child: Image.asset("assets/images/log.png",height: 300,width: 300,),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 30,top: 40),
+            child: Row(
+              children: [
+                Text("Login",
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold
+                  ),),
+                SizedBox(width: 10,),
+                Text("or"),
+                SizedBox(width: 10,),
+                Text("Signup",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18
+                  ),)
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 30,
+                right: 30),
+            child: SizedBox(height: 45,
+              child:TextField(
+                decoration: InputDecoration(
+                  // prefixIcon: Row(
+                  //   children: [
+                  //     Text("+91")
+                  //   ],
+                  // ),
+                  labelText: "Mobile Number",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(0),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 0, top: 10),
+            child: Stack(
+                children:[ Container(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 28),
+                        child: Row(
+                          children: [
+                            Text("By Continuing, I agree to the",
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  color: Colors.grey[700]
+                              ),),
+                            TextButton(onPressed: (){},
+                                child: Text("Terms of Use",
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        color: Colors.pink
+                                    ))),
+                            Text("&",
+                                style: TextStyle(
+                                    fontSize: 13,
+                                    color: Colors.grey[700]
+                                )),
+                            TextButton(onPressed: (){},
+                                child: Text("Privacy",
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        color: Colors.pink
+                                    ))),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                  Positioned(child:
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20,left: 16),
+                    child: TextButton(onPressed: (){},
+                        child: Text("Policy",
+                          style: TextStyle(
+                              color: Colors.pink
+                          ),)),
+                  ))
+                ]
+            ),
+          ),
+          SizedBox(
+            width: 330,
+            child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.pink,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(0)
+                    )
+                ),
+                onPressed: (){},
+                child: Text("CONTINUE",
+                  style: TextStyle(
+                      color: Colors.white
+                  ),)),
+          ),
+          Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 30,top: 20),
+                child: Row(
+                  children: [
+                    Text("Having trouble logging in ?",
+                      style: TextStyle(
+                          fontSize: 13
+                      ),),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 185,top: 6),
+                child: Positioned(child: TextButton(onPressed: (){},
+                    child: Text("Get help",
+                      style: TextStyle(
+                          color: Colors.pink
+                      ),))),
+              )
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}
